@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<script>
+
+  const OAuth2_URL="https://discord.com/oauth2/authorize?client_id=1264619678366564403&response_type=token&redirect_uri=https%3A%2F%2Fkagariet01.github.io%2FDC_OAuth_Demo&scope=identify"
+  
+</script>
+
+<html>
+	<head>
+		<title>My Discord OAuth2 App</title>
+	</head>
+	<body>
+		<div id="info">早安</div>
+		<a id="login" style="display: none;" href="">用DC登入</a>
+    
+		<br>
+		<a id="logout" style="display: none;" href="">登出</a>
+		<div id="log" style="display: none;"></div>
+		<div id="detail"></div>
+		<script>
+
+			mp={
+				"帳號ID":"id",
+				"使用者名稱":"username",
+				"顯示名稱":"global_name",
+				"頭像":"`<img src=\"https://cdn.discordapp.com/avatars/${id}/${avatar}?size=2048\">`",
+				"橫幅":"banner?`<img src=\"https://cdn.discordapp.com/banners/${id}/${banner}?size=2048\">`:\"無\"",
+				"雙重驗證":"mfa_enabled?\"是\":\"否\"",
+				"語言":"locale",
+
+			};
+
+			window.onload = () => {
+				const fragment = new URLSearchParams(window.location.hash.slice(1));
+				const [accessToken,tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
+				const error=()=>{
+          OAuth2_URL=OAuth2_URL.replaceAll("response_type=code","response_type=token");
+          document.getElementById('login').href=OAuth2_URL;
+					return (document.getElementById('login').style.display = 'block')
+				};
+				if (!accessToken) {
+					return error();
+				}
+				
+				console.log(accessToken, tokenType);
+
+				fetch('https://discord.com/api/users/@me', {
+					headers: {
+						authorization: `${tokenType} ${accessToken}`,
+					},
+				})
+					.then(result => result.json())
+					.then(response => {
+						if(response.message){
+							return error();
+						}
+						console.log(response);
+						const {id,username,avatar,discriminator,public_flags,flags,banner,accent_color,global_name,avatar_decoration_data,banner_color,clan,mfa_enabled,locale,premium_type} = response;
+						document.getElementById('info').innerHTML+="<br>";
+						document.getElementById('info').innerText += `你目前登入的身份是：${global_name} (${username})`;
+						document.getElementById('log').innerHTML = JSON.stringify(response, null, 2);
+
+						for(let i in mp){
+							document.getElementById('detail').innerHTML+=`${i}：${eval(mp[i])}<br>`;
+						}
+            document.getElementById('logout').href = window.location.href.replace(/\?.*/,"");
+            document.getElementById('logout').style.display = 'block'
+					})
+					.catch(console.error);
+			};
+		</script>
+	</body>
+</html>
