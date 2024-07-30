@@ -5,4 +5,7 @@
 
 ## 架設教學：
 
-首先，登入[DC](https://discord.com/login)
+0. 登入[DC](https://discord.com/login)  
+0. 進入[DC Dev - APP管理介面]([https://discord.com/developers](https://discord.com/developers/applications))
+0. 點擊右上角的 "New Application" 建立一個應用程式
+
