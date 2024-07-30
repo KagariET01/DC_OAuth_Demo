@@ -34,8 +34,8 @@
 				const fragment = new URLSearchParams(window.location.hash.slice(1));
 				const [accessToken,tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
 				const error=()=>{
-          OAuth2_URL=OAuth2_URL.replaceAll("response_type=code","response_type=token");
-          document.getElementById('login').href=OAuth2_URL;
+					document.getElementById('login').href=
+						OAuth2_URL.replaceAll("response_type=code","response_type=token");
 					return (document.getElementById('login').style.display = 'block')
 				};
 				if (!accessToken) {
