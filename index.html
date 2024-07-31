@@ -40,7 +40,7 @@
 						OAuth2_URL.replaceAll("response_type=code","response_type=token");
 					return (document.getElementById('login').style.display = 'block')
 				};
-				if(logout){
+				if(logout==1){
 					return error();
 				}
 				if (!accessToken) {
@@ -73,8 +73,9 @@
 						for(let i in mp){
 							document.getElementById('detail').innerHTML+=`${i}：${eval(mp[i])}<br>`;
 						}
-            document.getElementById('logout').href = window.location.href.replace(/\#.*/,"#logout=1");
-            document.getElementById('logout').style.display = 'block'
+						document.getElementById('logout').href = window.location.href.replace(/\#.*/,"#logout=1");
+						document.getElementById('logout').style.display = 'block'
+						window.location.href=window.location.href.replace(/\#.*/,"#");
 					})
 					.catch(console.error);
 			};
