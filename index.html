@@ -40,7 +40,7 @@
 						OAuth2_URL.replaceAll("response_type=code","response_type=token");
 					return (document.getElementById('login').style.display = 'block')
 				};
-				if(logout==1){
+				if(logout){
 					return error();
 				}
 				if (!accessToken) {
