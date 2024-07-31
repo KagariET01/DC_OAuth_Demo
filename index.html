@@ -32,14 +32,23 @@
 
 			window.onload = () => {
 				const fragment = new URLSearchParams(window.location.hash.slice(1));
-				const [accessToken,tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
+				const tokenType="Bearer";
+				let [accessToken,logout] = [fragment.get('access_token'), fragment.get('logout')];
 				const error=()=>{
+					document.cookie=`accessToken=`;
 					document.getElementById('login').href=
 						OAuth2_URL.replaceAll("response_type=code","response_type=token");
 					return (document.getElementById('login').style.display = 'block')
 				};
-				if (!accessToken) {
+				if(logout){
 					return error();
+				}
+				if (!accessToken) {
+					if(document.cookie.includes("accessToken")){
+						accessToken=document.cookie.split("wtf"+"=")[1].split(";")[0];
+					}else{
+						return error();
+					}
 				}
 				
 				console.log(accessToken, tokenType);
@@ -55,6 +64,7 @@
 							return error();
 						}
 						console.log(response);
+						document.cookie=`accessToken=${accessToken}`;
 						const {id,username,avatar,discriminator,public_flags,flags,banner,accent_color,global_name,avatar_decoration_data,banner_color,clan,mfa_enabled,locale,premium_type} = response;
 						document.getElementById('info').innerHTML+="<br>";
 						document.getElementById('info').innerText += `你目前登入的身份是：${global_name} (${username})`;
@@ -63,7 +73,7 @@
 						for(let i in mp){
 							document.getElementById('detail').innerHTML+=`${i}：${eval(mp[i])}<br>`;
 						}
-            document.getElementById('logout').href = window.location.href.replace(/\#.*/,"");
+            document.getElementById('logout').href = window.location.href.replace(/\#.*/,"#logout=1");
             document.getElementById('logout').style.display = 'block'
 					})
 					.catch(console.error);
