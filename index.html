@@ -64,6 +64,9 @@
 							return error();
 						}
 						console.log(response);
+						if(window.location.hash.includes("access_token")){
+							window.location.href=window.location.href.replace(/\#.*/,"#");
+						}
 						document.cookie=`accessToken=${accessToken}`;
 						const {id,username,avatar,discriminator,public_flags,flags,banner,accent_color,global_name,avatar_decoration_data,banner_color,clan,mfa_enabled,locale,premium_type} = response;
 						document.getElementById('info').innerHTML+="<br>";
@@ -75,9 +78,6 @@
 						}
 						document.getElementById('logout').href = window.location.href.replace(/\#.*/,"#logout=1");
 						document.getElementById('logout').style.display = 'block'
-						if(window.location.hash.includes("access_token")){
-							window.location.href=window.location.href.replace(/\#.*/,"#");
-						}
 					})
 					.catch(console.error);
 			};
