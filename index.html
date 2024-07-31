@@ -75,7 +75,8 @@
 						}
 						document.getElementById('logout').href = window.location.href.replace(/\#.*/,"#logout=1");
 						document.getElementById('logout').style.display = 'block'
-						window.location.href=window.location.href.replace(/\#.*/,"#");
+						if(window.location.hash.includes("access_token")
+							window.location.href=window.location.href.replace(/\#.*/,"#");
 					})
 					.catch(console.error);
 			};
