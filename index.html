@@ -14,7 +14,7 @@
 		<a id="login" style="display: none;" href="">用DC登入</a>
     
 		<br>
-		<a id="logout" style="display: none;" href="">登出</a>
+		<a id="logout" style="display: none;" href="./?logout">登出</a>
 		<div id="log" style="display: none;"></div>
 		<div id="detail"></div>
 		<script>
@@ -31,6 +31,9 @@
 			};
 
 			window.onload = () => {
+				if(window.location.search.includes("logout")){
+					return error();
+				}
 				const fragment = new URLSearchParams(window.location.hash.slice(1));
 				const tokenType="Bearer";
 				let [accessToken] = [fragment.get('access_token')];
@@ -76,7 +79,6 @@
 						for(let i in mp){
 							document.getElementById('detail').innerHTML+=`${i}：${eval(mp[i])}<br>`;
 						}
-						document.getElementById('logout').href = "./#logout=1";
 						document.getElementById('logout').style.display = 'block'
 					})
 					.catch(console.error);
