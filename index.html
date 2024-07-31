@@ -36,16 +36,13 @@
 				}
 				const fragment = new URLSearchParams(window.location.hash.slice(1));
 				const tokenType="Bearer";
-				let [accessToken] = [fragment.get('access_token')];
+				let accessToken = fragment.get('access_token');
 				const error=()=>{
 					document.cookie=`accessToken=`;
 					document.getElementById('login').href=
 						OAuth2_URL.replaceAll("response_type=code","response_type=token");
 					return (document.getElementById('login').style.display = 'block')
 				};
-				if(logout){
-					return error();
-				}
 				if (!accessToken) {
 					if(document.cookie.includes("accessToken")){
 						accessToken=document.cookie.split("accessToken"+"=")[1].split(";")[0];
@@ -54,7 +51,6 @@
 					}
 				}
 				
-				console.log(accessToken, tokenType);
 
 				fetch('https://discord.com/api/users/@me', {
 					headers: {
