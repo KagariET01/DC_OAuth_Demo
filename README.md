@@ -20,10 +20,10 @@
 0. 最後：記得儲存
    ![image](https://github.com/user-attachments/assets/94c349b6-c361-4fa8-af84-bc5002a58c98)
 0. 勾選identify
-0. 選擇你的網站(ex: http://localhost)
+0. 選擇你的網站（假如你最後要上架到 http://localhost ，那就選 http://localhost ）
 0. 複製產生出的URL
    ![image](https://github.com/user-attachments/assets/3e30a9eb-6b2c-4855-b505-65c565f762ae)
 0. 將 `index.html` line 4的網址改成你剛剛複製的網址
    ![image](https://github.com/user-attachments/assets/68bb1b2e-f935-4b25-944a-0275a93659b5)
-0. 將網站上架(上架的網址和11. 選擇的網址要是一樣的
+0. 將網站上架
 
