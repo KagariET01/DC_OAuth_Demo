@@ -29,4 +29,4 @@
 
 # LICENSE
 對於 `README.md` ，使用 [`CC BY-NC-SA 4.0`](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-hans) 授權  
-對於 `index.html` ，此程式改編自[link](https://discordjs.guide/oauth2)，請遵守該網站的授權條款
+對於 `index.html` ，此程式改編自 <https://discordjs.guide/oauth2> ，請遵守該網站的授權條款 ( `MIT License` )  
