@@ -38,7 +38,8 @@
 					return (document.getElementById('login').style.display = 'block')
 				};
 				if(window.location.search.includes("logout")){
-					return error();
+					error();
+					window.location.href("./");
 				}
 				const fragment = new URLSearchParams(window.location.hash.slice(1));
 				const tokenType="Bearer";
